@@ -1,12 +1,24 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "videojuegoLudus", "videojuegoLudus.csproj", "{BF2A89F3-F434-C15A-8EF4-AA4380BDEBF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "videojuegoLudus.Editor", "videojuegoLudus.Editor.csproj", "{C53A2773-6D46-E08F-3A77-B166FFC70E23}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BF2A89F3-F434-C15A-8EF4-AA4380BDEBF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF2A89F3-F434-C15A-8EF4-AA4380BDEBF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF2A89F3-F434-C15A-8EF4-AA4380BDEBF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF2A89F3-F434-C15A-8EF4-AA4380BDEBF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C53A2773-6D46-E08F-3A77-B166FFC70E23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C53A2773-6D46-E08F-3A77-B166FFC70E23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C53A2773-6D46-E08F-3A77-B166FFC70E23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C53A2773-6D46-E08F-3A77-B166FFC70E23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
