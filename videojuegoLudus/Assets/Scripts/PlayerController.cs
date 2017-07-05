@@ -12,6 +12,8 @@ namespace videojuegoLudus {
     public class PlayerController : MonoBehaviour {
 
         public float speed;
+        public int trapDamage;
+
 
         Rigidbody rb;
         HealthController hc;
@@ -40,7 +42,7 @@ namespace videojuegoLudus {
         {
             if (other.gameObject.CompareTag("Trap"))
             {
-                hc.TakeDamage(10);
+                hc.TakeDamage(trapDamage);
             }
         }
     }

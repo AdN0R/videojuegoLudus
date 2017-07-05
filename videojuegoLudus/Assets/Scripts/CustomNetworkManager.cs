@@ -9,11 +9,11 @@ namespace videojuegoLudus {
         public GameObject Supervisor;
         public GameObject Player;
 
-        public void OnClientConnect(Networking.NetworkConnection connection) {
+        //public void OnClientConnect(Networking.NetworkConnection connection) {
             //Se decide que Prefab es usado dependiendo de si es el host o el cliente
-            if (connection.isClient) {
+        //    if (connection.isClient) {
 
-            }
-        }
+        //    }
+        //}
     }
 }
