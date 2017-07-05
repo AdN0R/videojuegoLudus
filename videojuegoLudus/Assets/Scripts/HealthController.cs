@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Networking;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,9 +11,10 @@ namespace videojuegoLudus{
     /// <summary>
     /// Controlador de la vida y su representación gráfica
     /// </summary>
-    public class HealthController : MonoBehaviour
+    public class HealthController : NetworkBehaviour
     {
         public int startingHealth = 100;
+        [SyncVar(hook = "OnChangeHealth")]
         public int currentHealth;
         public Slider healthSlider;
         public Image damageImage;
@@ -51,13 +53,19 @@ namespace videojuegoLudus{
 
         public void TakeDamage(int amount)
         {
+            if (!isServer) {
+                return;
+            }
             damaged = true;
             currentHealth -= amount;
-            healthSlider.value = currentHealth;
+            
             if (currentHealth <= 0 && !isDead)
             {
                 Death();
             }
+        }
+        void OnChangeHealth(int health) {
+            healthSlider.value = currentHealth;
         }
 
 

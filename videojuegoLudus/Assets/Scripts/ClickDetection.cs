@@ -6,8 +6,8 @@ using UnityEngine;
 namespace videojuegoLudus {
     public class ClickDetection : NetworkBehaviour {
 
-        public string Tag = "Clickable";
         public float Distance = 9999;
+        private Animator TrapAnimation;
 
         private Transform tarjetedEnemy;
         private Ray shootRay;
@@ -15,7 +15,7 @@ namespace videojuegoLudus {
 
         // Use this for initialization
         void Awake() {
-
+            
         }
 
         // Update is called once per frame
@@ -34,11 +34,20 @@ namespace videojuegoLudus {
             }
 
         }
-        void ClickObject(GameObject gameObject) { //Funcion
-            if (gameObject.CompareTag(Tag)) {
-                // Avisar por consola
-                Debug.Log("Objeto clickable");
+        void ClickObject(GameObject gameObject) { //Funcion para activar la acción de cada objeto
+            string Tag = gameObject.tag;
+            Debug.Log(Tag);
+            switch (Tag) {
+                case "Door":
+                        gameObject.transform.Rotate(0, 90, 0);
+                    break;
+                case "Trap":
+                    TrapAnimation = gameObject.GetComponent<Animator>();
+                    //TrapAnimation.
+                    Debug.Log("Trap");
+                    break;
             }
+
         }
 
     }
