@@ -78,6 +78,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\HealthController.cs" />
     <Compile Include="Assets\ParadoxNotion\NodeCanvas\Framework\Design\PartialEditor\BlackboardEditor.cs" />
     <Compile Include="Assets\ParadoxNotion\NodeCanvas\Framework\Design\PartialEditor\EDITOR_Connection.cs" />
     <Compile Include="Assets\ParadoxNotion\NodeCanvas\Framework\Design\PartialEditor\EDITOR_Graph.cs" />
@@ -427,6 +428,8 @@
     <Compile Include="Assets\ParadoxNotion\NodeCanvas\Tasks\Conditions\Utility\DebugCondition.cs" />
     <Compile Include="Assets\ParadoxNotion\NodeCanvas\Tasks\Conditions\Utility\Probability.cs" />
     <Compile Include="Assets\ParadoxNotion\NodeCanvas\Tasks\Conditions\Utility\Timeout.cs" />
+    <Compile Include="Assets\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\PlayerController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ParadoxNotion\NodeCanvas\!ReadMe!.txt" />
