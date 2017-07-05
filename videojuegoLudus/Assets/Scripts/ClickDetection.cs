@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Networking;
 using UnityEngine;
+
 namespace videojuegoLudus {
-    public class ClickDetection : MonoBehaviour {
+    public class ClickDetection : NetworkBehaviour {
 
         public string Tag = "Clickable";
         public float Distance = 9999;
@@ -18,6 +20,9 @@ namespace videojuegoLudus {
 
         // Update is called once per frame
         void Update() {
+            if(!isLocalPlayer) {
+                return;
+            }
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Input.GetButtonDown("Fire1")) {
