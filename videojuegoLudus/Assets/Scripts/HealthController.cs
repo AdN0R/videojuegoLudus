@@ -19,13 +19,18 @@ namespace videojuegoLudus{
         public float flashSpeed = 5f;
         public Color flashColour = new Color(1f, 0f, 0f, 0.15f);
 
-        PlayerController playerController;
+
+        Rigidbody rb;
         bool isDead;
         bool damaged;
-        
+
+        private void Start()
+        {
+            rb = GetComponent<Rigidbody>();
+        }
+
         void Awake()
         {
-            playerController = GetComponent<PlayerController>();
             currentHealth = startingHealth;
         }
 
@@ -59,7 +64,7 @@ namespace videojuegoLudus{
         void Death()
         {
             isDead = true;
-            playerController.enabled = false;
+            rb.isKinematic = true;
         }
     }
 }
