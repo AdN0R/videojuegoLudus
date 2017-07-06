@@ -18,21 +18,25 @@ namespace videojuegoLudus {
         public Camera cam;
         public GameObject bulletPrefab;
         public Transform bulletSpawn;
+        public Canvas canvas;
+
         private Transform tarjetedEnemy;
         private Ray shootRay;
         private RaycastHit shootHit;
 
         Rigidbody rb;
         HealthController hc;
+        Animator anim;
     
         private void Start()
         {              
             rb = GetComponent<Rigidbody>();
             hc = GetComponent<HealthController>();
             if (!isLocalPlayer) {
+                canvas.enabled = false;
                 cam.enabled = false;
             }
-            
+            anim = GetComponent<Animator>();
         }
 
         void FixedUpdate()
@@ -43,8 +47,11 @@ namespace videojuegoLudus {
             var x = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
             var z = Input.GetAxis("Vertical") * Time.deltaTime * 3.0f;
 
+            Animating(x,z);
             transform.Rotate(0, x, 0);
             transform.Translate(0, 0, z);
+            transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
+            transform.rotation = Quaternion.Euler(0.0f, transform.rotation.y, 0.0f);
 
             if (Input.GetKeyDown(KeyCode.Space)) {
                 CmdFire();
@@ -103,6 +110,12 @@ namespace videojuegoLudus {
 
         public override void OnStartLocalPlayer() {
             GetComponent<MeshRenderer>().material.color = Color.blue;
+        }
+
+        void Animating(float x, float z)
+        {
+            bool walking = x != 0f || z != 0f;
+            anim.SetBool("isWalking", walking);
         }
     }
 }
