@@ -24,13 +24,11 @@ namespace videojuegoLudus {
         private Ray shootRay;
         private RaycastHit shootHit;
 
-        Rigidbody rb;
         HealthController hc;
         Animator anim;
     
         private void Start()
         {              
-            rb = GetComponent<Rigidbody>();
             hc = GetComponent<HealthController>();
             if (!isLocalPlayer) {
                 canvas.enabled = false;
@@ -89,7 +87,8 @@ namespace videojuegoLudus {
                 bulletSpawn.rotation);
 
             // Add velocity to the bullet
-            bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6;
+            bullet.GetComponent<Rigidbody>().velocity = bullet.transform.up * 6;
+            anim.SetTrigger("shot");
             NetworkServer.Spawn(bullet);
             // Destroy the bullet after 2 seconds
             Destroy(bullet, 2.0f);
@@ -108,14 +107,10 @@ namespace videojuegoLudus {
             }
         }
 
-        public override void OnStartLocalPlayer() {
-            GetComponent<MeshRenderer>().material.color = Color.blue;
-        }
-
         void Animating(float x, float z)
         {
             bool walking = x != 0f || z != 0f;
-            anim.SetBool("isWalking", walking);
+            anim.SetBool("isMoving", walking);
         }
     }
 }
