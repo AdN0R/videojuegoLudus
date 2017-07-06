@@ -31,39 +31,44 @@ namespace videojuegoLudus {
         {              
             hc = GetComponent<HealthController>();
             if (!isLocalPlayer) {
-                canvas.enabled = false;
                 cam.enabled = false;
+                canvas.transform.GetChild(0).position = new Vector3(150, 0, 0);
             }
             anim = GetComponent<Animator>();
         }
 
         void FixedUpdate()
         {
-            if (!isLocalPlayer) {
+            if (!isLocalPlayer)
+            {
                 return;
             }
             var x = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
             var z = Input.GetAxis("Vertical") * Time.deltaTime * 3.0f;
 
-            Animating(x,z);
+            Animating(z);
             transform.Rotate(0, x, 0);
             transform.Translate(0, 0, z);
             transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
-            transform.rotation = Quaternion.Euler(0.0f, transform.rotation.y, 0.0f);
+            transform.rotation = Quaternion.Euler(0.0f, transform.eulerAngles.y, 0.0f);
 
-            if (Input.GetKeyDown(KeyCode.Space)) {
+            if (Input.GetKeyDown(KeyCode.Space) && isServer)
+            {
                 CmdFire();
             }
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Input.GetButtonDown("Fire1")) {
-                if (Physics.Raycast(ray, out hit, Distance)) {
+            if (!isServer)
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                if (Input.GetButtonDown("Fire1") && (Physics.Raycast(ray, out hit, Distance)))
+                {
                     ClickObject(hit.collider.gameObject);
-
-
                 }
             }
+
         }
+
         void ClickObject(GameObject gameObject) { //Funcion para activar la acción de cada objeto
             string Tag = gameObject.tag;
             Debug.Log(Tag);
@@ -87,19 +92,14 @@ namespace videojuegoLudus {
                 bulletSpawn.rotation);
 
             // Add velocity to the bullet
-            bullet.GetComponent<Rigidbody>().velocity = bullet.transform.up * 6;
+            bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6;
             anim.SetTrigger("shot");
             NetworkServer.Spawn(bullet);
             // Destroy the bullet after 2 seconds
             Destroy(bullet, 2.0f);
         }
-        void OnCollisionEnter(Collision other) {
-            if (other.gameObject.tag == "Player") {
-                Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
-            }
-        }
 
-            void OnTriggerEnter(Collider other)
+        void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag("Trap"))
             {
@@ -107,9 +107,15 @@ namespace videojuegoLudus {
             }
         }
 
-        void Animating(float x, float z)
+        public override void OnStartLocalPlayer()
         {
-            bool walking = x != 0f || z != 0f;
+            // GameObject soldier = player.transform.GetChild(1).renderer
+            //player.transform.GetComponentInChildren<Renderer>().material.color = Color.green;
+        }
+
+        void Animating(float z)
+        {
+            bool walking = z != 0f;
             anim.SetBool("isMoving", walking);
         }
     }

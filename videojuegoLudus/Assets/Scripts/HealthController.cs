@@ -7,38 +7,30 @@ using UnityEngine.UI;
 /// <summary>
 ///  Videojuego creado por Andoni y Ruben de prácticas
 /// </summary>
-namespace videojuegoLudus{
+namespace videojuegoLudus
+{
     /// <summary>
     /// Controlador de la vida y su representación gráfica
     /// </summary>
     public class HealthController : NetworkBehaviour
     {
-        public int startingHealth = 100;
+        public const int startingHealth = 100;
         [SyncVar(hook = "OnChangeHealth")]
-        public int currentHealth;
+        public int currentHealth = startingHealth;
         public Slider healthSlider;
         public Image damageImage;
         public float flashSpeed = 5f;
         public Color flashColour = new Color(1f, 0f, 0f, 0.15f);
 
-
-        Rigidbody rb;
         bool isDead;
         bool damaged;
 
-        private void Start()
-        {
-            rb = GetComponent<Rigidbody>();
-        }
-
-        void Awake()
-        {
-            currentHealth = startingHealth;
-        }
-
-
         void Update()
         {
+            if (!isLocalPlayer)
+            {
+                return;
+            }
             if (damaged)
             {
                 damageImage.color = flashColour;
@@ -50,21 +42,32 @@ namespace videojuegoLudus{
             damaged = false;
         }
 
-
-        public void TakeDamage(int amount)
+        [Command]
+        void CmdTakeDamage(int amount)
         {
-            if (!isServer) {
+            Debug.Log("take damage");
+            damaged = true;
+            if (!isServer)
+            {
                 return;
             }
-            damaged = true;
             currentHealth -= amount;
-            
+
             if (currentHealth <= 0 && !isDead)
             {
                 Death();
             }
         }
-        void OnChangeHealth(int health) {
+
+        public void TakeDamage(int amount)
+        {
+            CmdTakeDamage(amount);
+        }
+
+        void OnChangeHealth(int health)
+        {
+            currentHealth = health;
+            Debug.Log("OnChange Health " + currentHealth);
             healthSlider.value = currentHealth;
         }
 
@@ -72,7 +75,6 @@ namespace videojuegoLudus{
         void Death()
         {
             isDead = true;
-            rb.isKinematic = true;
         }
     }
 }
