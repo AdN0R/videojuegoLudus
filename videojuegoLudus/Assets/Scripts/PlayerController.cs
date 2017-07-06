@@ -74,7 +74,7 @@ namespace videojuegoLudus {
             Debug.Log(Tag);
             switch (Tag) {
                 case "Door":
-                    gameObject.transform.Rotate(0, 90, 0);
+                    StartCoroutine(gameObject.GetComponent<Door>().Open());
                     break;
                 case "Trap":
                     //TrapAnimation = gameObject.GetComponent<Animator>();
@@ -101,9 +101,12 @@ namespace videojuegoLudus {
 
         void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.CompareTag("Trap"))
+            if (isLocalPlayer)
             {
-                hc.TakeDamage(trapDamage);
+                if (other.gameObject.CompareTag("Trap"))
+                {
+                    hc.TakeDamage(trapDamage);
+                }
             }
         }
 

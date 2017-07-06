@@ -41,18 +41,11 @@ namespace videojuegoLudus
             }
             damaged = false;
         }
-
+        
         [Command]
         void CmdTakeDamage(int amount)
         {
-            Debug.Log("take damage");
-            damaged = true;
-            if (!isServer)
-            {
-                return;
-            }
             currentHealth -= amount;
-
             if (currentHealth <= 0 && !isDead)
             {
                 Death();
@@ -61,13 +54,13 @@ namespace videojuegoLudus
 
         public void TakeDamage(int amount)
         {
-            CmdTakeDamage(amount);
+                damaged = true;
+                CmdTakeDamage(amount);
         }
 
         void OnChangeHealth(int health)
         {
             currentHealth = health;
-            Debug.Log("OnChange Health " + currentHealth);
             healthSlider.value = currentHealth;
         }
 
