@@ -69,12 +69,11 @@ namespace videojuegoLudus
             currentHealth = health;
             healthSlider.value = currentHealth;
         }
-
-
-        void Death()
-        {
-            isDead = true;
-            anim.SetTrigger("die");
+        void Death() {
+            /*isDead = true;
+            anim.SetTrigger("die");*/
+            currentHealth = startingHealth;
+            gameObject.GetComponent<PlayerController>().Death();
         }
     }
 }
