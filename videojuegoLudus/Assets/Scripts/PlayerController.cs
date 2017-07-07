@@ -72,13 +72,15 @@ namespace videojuegoLudus {
 
         void ClickObject(GameObject gameObject) { //Funcion para activar la acción de cada objeto
             string Tag = gameObject.tag;
-            Debug.Log(Tag);
             switch (Tag) {
                 case "Door":
                     CmdOpenDoor(gameObject.name);
                     break;
-                case "Trap":
+                case "Mine":
                     CmdExplosiveTrap(gameObject.name);
+                    break;
+                case "Trap":
+
                     break;
             }
         }
@@ -96,7 +98,6 @@ namespace videojuegoLudus {
         }
         [ClientRpc]
         void RpcExplosiveTrap(string name) {
-            Debug.Log(name);
             GameObject.Find(name).GetComponent<MineExplosion>().enabled = true;
         }
         [Command]
@@ -127,6 +128,9 @@ namespace videojuegoLudus {
                 if (other.gameObject.CompareTag("Trap"))
                 {
                     hc.TakeDamage(trapDamage);
+                }
+                if (other.gameObject.CompareTag("Mine")) {
+                    CmdExplosiveTrap(other.name);
                 }
             }
         }
