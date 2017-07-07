@@ -141,6 +141,7 @@
   <ItemGroup>
     <None Include="Assets\ParadoxNotion\NodeCanvas\!ReadMe!.txt" />
     <None Include="Assets\ParadoxNotion\NodeCanvas\Framework\_Commons\Runtime\Serialization\_LICENSE - FULL SERIALIZER.txt" />
+    <None Include="Assets\Shader\Exposion.shader" />
     <None Include="Assets\ToonSoldiers_WW2_demo\ToonSoldiers_WW2_demo_README.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
