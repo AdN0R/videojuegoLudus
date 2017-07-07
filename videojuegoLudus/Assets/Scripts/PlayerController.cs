@@ -47,6 +47,7 @@ namespace videojuegoLudus {
             var z = Input.GetAxis("Vertical") * Time.deltaTime * 3.0f;
 
             Animating(z);
+            Debug.Log("Oli :D");
             transform.Rotate(0, x, 0);
             transform.Translate(0, 0, z);
             transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
@@ -54,6 +55,7 @@ namespace videojuegoLudus {
 
             if (Input.GetKeyDown(KeyCode.Space) && isServer)
             {
+                anim.SetTrigger("shot");
                 CmdFire();
             }
             if (!isServer)
@@ -93,7 +95,7 @@ namespace videojuegoLudus {
 
             // Add velocity to the bullet
             bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6;
-            anim.SetTrigger("shot");
+            //anim.SetTrigger("shot");
             NetworkServer.Spawn(bullet);
             // Destroy the bullet after 2 seconds
             Destroy(bullet, 2.0f);
