@@ -22,8 +22,14 @@ namespace videojuegoLudus
         public float flashSpeed = 5f;
         public Color flashColour = new Color(1f, 0f, 0f, 0.15f);
 
+        Animator anim;
         bool isDead;
         bool damaged;
+
+        private void Start()
+        {
+            anim = GetComponent<Animator>();
+        }
 
         void Update()
         {
@@ -68,6 +74,7 @@ namespace videojuegoLudus
         void Death()
         {
             isDead = true;
+            anim.SetTrigger("die");
         }
     }
 }
