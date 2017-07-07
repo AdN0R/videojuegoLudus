@@ -47,7 +47,6 @@ namespace videojuegoLudus {
             var z = Input.GetAxis("Vertical") * Time.deltaTime * 3.0f;
 
             Animating(z);
-            Debug.Log("Oli :D");
             transform.Rotate(0, x, 0);
             transform.Translate(0, 0, z);
             transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
@@ -76,14 +75,29 @@ namespace videojuegoLudus {
             Debug.Log(Tag);
             switch (Tag) {
                 case "Door":
-                    StartCoroutine(gameObject.GetComponent<Door>().Open());
+                    CmdOpenDoor(gameObject.name);
                     break;
                 case "Trap":
-                    //TrapAnimation = gameObject.GetComponent<Animator>();
-                    //TrapAnimation.
-                    Debug.Log("Trap");
+                    CmdExplosiveTrap(gameObject.name);
                     break;
             }
+        }
+        [Command]
+        void CmdOpenDoor(string name) {
+            RpcOpenDoor(name);
+        }
+        [ClientRpc]
+        void RpcOpenDoor(string name) {
+            StartCoroutine(GameObject.Find(name).GetComponent<Door>().Open());
+        }
+        [Command]
+        void CmdExplosiveTrap(string name) {
+            RpcExplosiveTrap(name);
+        }
+        [ClientRpc]
+        void RpcExplosiveTrap(string name) {
+            Debug.Log(name);
+            GameObject.Find(name).GetComponent<MineExplosion>().enabled = true;
         }
         [Command]
         void CmdFire() {
@@ -96,9 +110,14 @@ namespace videojuegoLudus {
             // Add velocity to the bullet
             bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6;
             //anim.SetTrigger("shot");
+            RpcSetTrigger("shot");
             NetworkServer.Spawn(bullet);
             // Destroy the bullet after 2 seconds
             Destroy(bullet, 2.0f);
+        }
+        [ClientRpc]
+        public void RpcSetTrigger(string trigger) {
+            anim.SetTrigger(trigger);
         }
 
         void OnTriggerEnter(Collider other)
