@@ -40,7 +40,6 @@ namespace videojuegoLudus {
 
         void Update() {
             timer += Time.deltaTime;
-            Debug.Log(player.name);
             if (timer >= timeBetweenAttacks && playerInRange && enemyHealth.currentHealth > 0) {
                 Attack();
             }

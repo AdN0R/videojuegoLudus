@@ -25,6 +25,11 @@ namespace videojuegoLudus {
                 nav.enabled = false;
             }
         }
+        void OnTriggerEnter(Collider other) {
+            if (other.gameObject.CompareTag("Mine")) {
+                other.GetComponent<MineExplosion>().enabled = true;
+            }
+        }
     }
 }
    

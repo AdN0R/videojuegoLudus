@@ -19,6 +19,7 @@ namespace videojuegoLudus {
         public GameObject bulletPrefab;
         public Transform bulletSpawn;
         public Canvas canvas;
+        public float bulletSpeed;
 
         private Transform tarjetedEnemy;
         private Ray shootRay;
@@ -46,7 +47,9 @@ namespace videojuegoLudus {
             }
             var x = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
             var z = Input.GetAxis("Vertical") * Time.deltaTime * 3.0f;
-
+            if (Input.GetKey(KeyCode.LeftShift) && isServer){
+                z *= 3;
+            }
             Animating(z);
             transform.Rotate(0, x, 0);
             transform.Translate(0, 0, z);
@@ -101,6 +104,7 @@ namespace videojuegoLudus {
         void RpcExplosiveTrap(string name) {
             GameObject.Find(name).GetComponent<MineExplosion>().enabled = true;
         }
+
         [Command]
         void CmdFire() {
             // Create the Bullet from the Bullet Prefab
@@ -110,7 +114,7 @@ namespace videojuegoLudus {
                 bulletSpawn.rotation);
 
             // Add velocity to the bullet
-            bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6;
+            bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed;
             //anim.SetTrigger("shot");
             RpcSetTrigger("shot");
             NetworkServer.Spawn(bullet);

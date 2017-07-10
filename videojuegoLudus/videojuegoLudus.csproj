@@ -78,8 +78,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\AvoidRotation.cs" />
-    <Compile Include="Assets\ChaseController.cs" />
     <Compile Include="Assets\ParadoxNotion\NodeCanvas\Framework\Design\PartialEditor\BlackboardEditor.cs" />
     <Compile Include="Assets\ParadoxNotion\NodeCanvas\Framework\Design\PartialEditor\EDITOR_Connection.cs" />
     <Compile Include="Assets\ParadoxNotion\NodeCanvas\Framework\Design\PartialEditor\EDITOR_Graph.cs" />
@@ -429,19 +427,23 @@
     <Compile Include="Assets\ParadoxNotion\NodeCanvas\Tasks\Conditions\Utility\DebugCondition.cs" />
     <Compile Include="Assets\ParadoxNotion\NodeCanvas\Tasks\Conditions\Utility\Probability.cs" />
     <Compile Include="Assets\ParadoxNotion\NodeCanvas\Tasks\Conditions\Utility\Timeout.cs" />
+    <Compile Include="Assets\Scripts\AvoidRotation.cs" />
     <Compile Include="Assets\Scripts\Bullet.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\ChaseController.cs" />
     <Compile Include="Assets\Scripts\ClickDetection.cs" />
     <Compile Include="Assets\Scripts\CustomNetworkManager.cs" />
     <Compile Include="Assets\Scripts\Door.cs" />
     <Compile Include="Assets\Scripts\EnemyAttack.cs" />
     <Compile Include="Assets\Scripts\EnemyHealth.cs" />
     <Compile Include="Assets\Scripts\EnemyMovement.cs" />
+    <Compile Include="Assets\Scripts\GameControll.cs" />
     <Compile Include="Assets\Scripts\GraphicExplosion.cs" />
     <Compile Include="Assets\Scripts\HealthController.cs" />
     <Compile Include="Assets\Scripts\MineExplosion.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\SupervisorMovement.cs" />
+    <Compile Include="Assets\Scripts\WallController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ParadoxNotion\NodeCanvas\!ReadMe!.txt" />
