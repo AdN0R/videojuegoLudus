@@ -441,6 +441,7 @@
     <Compile Include="Assets\Scripts\GraphicExplosion.cs" />
     <Compile Include="Assets\Scripts\HealthController.cs" />
     <Compile Include="Assets\Scripts\MineExplosion.cs" />
+    <Compile Include="Assets\Scripts\MineMovement.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\SupervisorMovement.cs" />
     <Compile Include="Assets\Scripts\WallController.cs" />
