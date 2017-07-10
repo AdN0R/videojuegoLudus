@@ -47,7 +47,7 @@ namespace videojuegoLudus {
             }
             var x = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
             var z = Input.GetAxis("Vertical") * Time.deltaTime * 3.0f;
-            if (Input.GetKey(KeyCode.LeftShift) && isServer){
+            if (Input.GetKey(KeyCode.LeftShift)){
                 z *= 3;
             }
             Animating(z);
