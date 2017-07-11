@@ -43,10 +43,6 @@ namespace videojuegoLudus {
             if (timer >= timeBetweenAttacks && playerInRange && enemyHealth.currentHealth > 0) {
                 Attack();
             }
-
-            if (playerHealth.currentHealth <= 0) {
-                anim.SetTrigger("PlayerDead");
-            }
         }
 
 

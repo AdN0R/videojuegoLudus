@@ -5,8 +5,6 @@ namespace videojuegoLudus {
     public class EnemyHealth : NetworkBehaviour {
         public int startingHealth = 100;
         public int currentHealth;
-        public float sinkSpeed = 2.5f;
-        public int scoreValue = 10;
         public AudioClip deathClip;
 
 
@@ -15,8 +13,6 @@ namespace videojuegoLudus {
         ParticleSystem hitParticles;
         CapsuleCollider capsuleCollider;
         bool isDead;
-        bool isSinking;
-
 
         void Awake() {
             anim = GetComponent<Animator>();
@@ -25,13 +21,6 @@ namespace videojuegoLudus {
             capsuleCollider = GetComponent<CapsuleCollider>();
 
             currentHealth = startingHealth;
-        }
-
-
-        void Update() {
-            if (isSinking) {
-                transform.Translate(-Vector3.up * sinkSpeed * Time.deltaTime);
-            }
         }
 
 
@@ -57,19 +46,12 @@ namespace videojuegoLudus {
 
             capsuleCollider.isTrigger = true;
 
-            anim.SetTrigger("Dead");
-
             enemyAudio.clip = deathClip;
             enemyAudio.Play();
-            Destroy(gameObject);
+            RcpDestroyEnemy(gameObject.name);
         }
-
-
-        public void StartSinking() {
-            GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
-            GetComponent<Rigidbody>().isKinematic = true;
-            isSinking = true;
-            Destroy(gameObject, 2f);
+        void RcpDestroyEnemy(string name) {
+            Destroy(GameObject.Find(name));
         }
     }
 }

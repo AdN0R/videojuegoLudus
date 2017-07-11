@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
+using NodeCanvas.BehaviourTrees;
 
 namespace videojuegoLudus {
     public class EnemyMovement : NetworkBehaviour {
@@ -10,21 +11,13 @@ namespace videojuegoLudus {
         UnityEngine.AI.NavMeshAgent nav;
 
 
-        void Awake() {
-            player = GameObject.FindGameObjectWithTag("Player").transform;
-            playerHealth = player.GetComponent<HealthController>();
-            enemyHealth = GetComponent<EnemyHealth>();
+        void OnEnable() {
+            /*if (isServer) {
+                gameObject.GetComponent<BehaviourTreeOwner>().enabled = true;
+            }*/
             nav = GetComponent<UnityEngine.AI.NavMeshAgent>();
         }
 
-
-        void Update() {
-            if (enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0) {
-                nav.SetDestination(player.position);
-            } else {
-                nav.enabled = false;
-            }
-        }
         void OnTriggerEnter(Collider other) {
             if (other.gameObject.CompareTag("Mine")) {
                 other.GetComponent<MineExplosion>().enabled = true;

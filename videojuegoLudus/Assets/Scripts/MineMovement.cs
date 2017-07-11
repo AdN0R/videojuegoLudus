@@ -3,13 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Networking;
 using UnityEngine;
-
-public class MineMovement : NetworkBehaviour {
-
-    // Use this for initialization
-    void Start() {
-        if (isServer) {
-            gameObject.GetComponent<FSMOwner>().enabled = true;
+namespace videojuegoLudus {
+    public class MineMovement : NetworkBehaviour {
+        private bool FSM;
+        // Use this for initialization
+        void Start() {
+            FSM = gameObject.GetComponent<MineExplosion>().FSM;
+            if (isServer && FSM) {
+                gameObject.GetComponent<FSMOwner>().enabled = true;
+            }
         }
     }
 }

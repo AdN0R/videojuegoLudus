@@ -6,6 +6,7 @@ using UnityEngine;
 namespace videojuegoLudus {
     public class MineExplosion : NetworkBehaviour {
         public GameObject explosion1;
+        public bool FSM = false;
         // Use this for initialization
         void Start() {
             explosion1.SetActive(true);
@@ -16,7 +17,9 @@ namespace videojuegoLudus {
         void ActivateMine() {
             gameObject.GetComponent<SphereCollider>().radius = 0.9f;
             Invoke("ColliderDisable", 1);
-            gameObject.GetComponent<FSMOwner>().enabled = false;
+            if (FSM){
+                gameObject.GetComponent<FSMOwner>().enabled = false;
+            }
 
         }
         void ColliderDisable() {

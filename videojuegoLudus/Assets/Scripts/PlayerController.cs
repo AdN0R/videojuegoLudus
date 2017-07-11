@@ -29,7 +29,7 @@ namespace videojuegoLudus {
         Animator anim;
     
         private void Start()
-        {              
+        {
             hc = GetComponent<HealthController>();
             if (!isLocalPlayer) {
                 cam.enabled = false;
